@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
 	double usKp, targetDist, basePower;
 	
 	public VictorSPDriveSystem driveSys;
+	public Navigation navigateWall;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -52,6 +53,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("basePower", basePower);
 		
 		driveSys = new VictorSPDriveSystem(this);
+		
+		navigateWall = new Navigation(this, usKp);
 	}
 
 	/**
@@ -76,7 +79,8 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
         SmartDashboard.putNumber("DistanceLeft", usLeft.getDistanceInches());
         SmartDashboard.putNumber("DistanceRight", usRight.getDistanceInches());
-        usLeft.maintainDistance(targetDist, basePower);
+        navigateWall.keepDistFromWall(targetDist, basePower, true);
+//        usLeft.maintainDistance(targetDist, basePower);
 	}
 
 	/**
