@@ -18,6 +18,8 @@ public class MaxBotixRangeFinder {
     double VoltsPerCm; // Volts per cm output by the range finder in analog mode
     AnalogInput usSensor;
     Robot robot;
+    double previousReading;
+    int iteration;
 
     /**
      * 
@@ -28,7 +30,8 @@ public class MaxBotixRangeFinder {
         this.maxbotixModel = maxbotixModel;
         this.Vcc = 5.0;
         this.usSensor =  new AnalogInput(port);
-
+        previousReading = 0;
+        iteration = 1;
         switch (maxbotixModel) {
         case "MB1013": {
             VoltsPerCm = 2 * (Vcc/1024);
@@ -46,8 +49,11 @@ public class MaxBotixRangeFinder {
     public double getDistanceInches() {
         double inches = 0.393701; // inches per cm
         double Vm = usSensor.getAverageVoltage();
-        double distanceInCm = Vm / VoltsPerCm; 
-        inches *= distanceInCm;
+        double distanceInIn = Vm / VoltsPerCm;
+        if(iteration != 1) distanceInIn = (0.7*distanceInIn) + (0.3*previousReading);
+        previousReading = distanceInIn;
+        inches *= distanceInIn;
+        iteration++;
         return (inches);
     }
     
