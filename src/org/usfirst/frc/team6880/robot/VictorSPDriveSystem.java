@@ -22,12 +22,15 @@ public class VictorSPDriveSystem {
 	private double wheelCircumference;
 	private double distancePerCount;
 	private double mult;
+	private double rampMult;
+	private double prevPower;
 	
 	
 	public VictorSPDriveSystem(Robot robot)
 	{
 		this.robot = robot;
-		
+		rampMult = 0.0;
+		prevPower = 0.0;
 		wheelDiameter = 6.0;
 		wheelCircumference = Math.PI * wheelDiameter;
 		// We will assume that the same encoder is used on both left and right sides of the drive train. 
@@ -59,7 +62,20 @@ public class VictorSPDriveSystem {
 	
 	public void arcadeDrive(double speed, double rotationRate)
 	{
-		drive.arcadeDrive(mult*speed, mult*rotationRate);
+		speed *= mult;
+		speed = Math.pow(speed, rampMult);
+		drive.arcadeDrive(speed, mult*rotationRate);
+		if(prevPower<speed)
+		{
+			rampMult += 0.1;
+		}
+		else if(prevPower>speed)
+		{
+			rampMult -= 0.1;
+		}
+		else if(prevPower==speed)
+			rampMult = 1;
+		prevPower = 
 	}
 	
 	public void resetEncoders()

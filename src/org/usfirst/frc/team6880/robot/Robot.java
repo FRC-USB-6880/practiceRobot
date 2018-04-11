@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
 		usLeft = new MaxBotixRangeFinder(this, "MB1200", leftPort);
 		usRight = new MaxBotixRangeFinder(this, "MB1013", rightPort);
 		
-		usKp = prefs.getDouble("usKp", 0.02);
+		usKp = 0.25;
 		targetDist = prefs.getDouble("targetDist", 20.0);
 		basePower = prefs.getDouble("basePower", 0.4);
 		SmartDashboard.putNumber("usKp", usKp);

@@ -36,4 +36,11 @@ public class Navigation {
 		robot.driveSys.tankDrive(leftSpeed, rightSpeed);
 	}
 
+	public void moveToDist(double targetDist, double speed)
+	{
+		if(robot.usRight.getDistanceInches()>targetDist)
+			robot.driveSys.tankDrive(speed, speed);
+		else if(robot.usRight.getDistanceInches()<=targetDist)
+			robot.driveSys.tankDrive(0, 0);
+	}
 }
