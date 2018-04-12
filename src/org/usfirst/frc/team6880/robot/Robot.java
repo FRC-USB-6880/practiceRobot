@@ -79,7 +79,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
         SmartDashboard.putNumber("DistanceLeft", usLeft.getDistanceInches());
         SmartDashboard.putNumber("DistanceRight", usRight.getDistanceInches());
-        navigateWall.keepDistFromWall(targetDist, basePower, true);
+//        navigateWall.keepDistFromWall(targetDist, basePower, true);
 //        usLeft.maintainDistance(targetDist, basePower);
 	}
 

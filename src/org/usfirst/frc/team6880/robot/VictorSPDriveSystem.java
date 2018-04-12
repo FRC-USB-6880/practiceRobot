@@ -62,20 +62,20 @@ public class VictorSPDriveSystem {
 	
 	public void arcadeDrive(double speed, double rotationRate)
 	{
-		speed *= mult;
-		speed = Math.pow(speed, rampMult);
+//		speed *= mult;
+//		speed = Math.pow(speed, rampMult);
 		drive.arcadeDrive(speed, mult*rotationRate);
-		if(prevPower<speed)
-		{
-			rampMult += 0.1;
-		}
-		else if(prevPower>speed)
-		{
-			rampMult -= 0.1;
-		}
-		else if(prevPower==speed)
-			rampMult = 1;
-		prevPower = 
+//		if(prevPower<speed)
+//		{
+//			rampMult += 0.1;
+//		}
+//		else if(prevPower>speed)
+//		{
+//			rampMult -= 0.1;
+//		}
+//		else if(prevPower==speed)
+//			rampMult = 1;
+//		prevPower = 
 	}
 	
 	public void resetEncoders()
